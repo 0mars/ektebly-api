@@ -7,8 +7,6 @@ services:
       dockerfile: Dockerfile
       context: ./packages/meerkat
     environment:
-      - KAFKA_VERSION=2.2.0
-      - LOG_TAG_SERVICE=meerkat
       - ENVIRONMENT=DEVELOPMENT
       - APP_URL=http://localhost:8021
       - MONGO_HOST=skel_db
@@ -17,8 +15,6 @@ services:
     ports:
       - "8000:8000"
     depends_on:
-      - skel_zookeeper
-      - skel_kafka
       - skel_es
       - skel_db
     entrypoint:
@@ -28,8 +24,6 @@ services:
       - ./:/code
       - /code/packages/meerkat/.venv
     links:
-      - skel_zookeeper
-      - skel_kafka
       - skel_es
       - skel_db
 
@@ -85,7 +79,4 @@ services:
 
 
 volumes:
-  skel_grafana_vol:
-  skel_graf_db:
   skel_es:
-  prom_data: {}
